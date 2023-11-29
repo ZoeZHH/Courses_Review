@@ -1,0 +1,7 @@
+---
+title: "GEOS200"
+format: html
+editor: visual
+---
+
+## Lecture 1 - Energy
