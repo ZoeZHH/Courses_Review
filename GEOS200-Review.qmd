@@ -5,3 +5,65 @@ editor: visual
 ---
 
 ## Lecture 1 - Energy
+
+1.  Forms of energy in the atmosphere:
+    -   Radiation: Electromagnetic waves (eg. sunlight)
+    -   Sensible heat: Thermal energy we can feel (eg. warm air, cold ice)
+    -   Latent heat: Phase changes of a water (eg. evaporation, condensation)
+    -   Chemical energy: bonds of atoms (eg. photosynthesis)
+    -   Kinetic energy: from motion (eg. winds)
+    -   Geopotential: position in gravitational field.
+2.  Heat vs. Temperature
+    -   Heat is thermal energy, sum of kinetic and potential energy, can do work, often expressed in Joules (J)
+    -   Temperature is a relative measure of thermal energy, increase/decrease when heat is added/removed, cannot do work
+        -   T (K) = T (deg C) + 273.15
+3.  Three states of water
+    -   Ice, liquid and vapor
+
+        ![](images/Screen Shot 2023-11-29 at 3.42.35 PM-01.png){width="373"}
+
+    -   Latent heat: the energy (kJ/kg) required for water to change states varies with temperature
+
+    -   How storm clouds form?
+
+        -   Water at the Earth's surface evaporates, it absorbs energy from its surroundings. Water vapor holds the energy as latent heat (no temperature change) -\> water vapor rises into atmosphere, cools and condenses back to liquid water -\> heat releases as sensible heat (temperature change) -\> the immense energy released, contributing to intensity and dynamics of storm cloud.
+
+    -   Spray liquid water on a tree to reduce frost damage
+
+        -   Liquid -\> Ice, heat released to the environment (trees), prevent a damaging drop in temperature of trees
+4.  Energy transfer in the atmosphere
+    -   Radiation - electromagnetic waves
+    -   Conduction - molecular motion
+    -   Convection - mass movement in a fluid
+        -   Free convection: caused by hear from hot ground
+        -   Forced convection: air movement caused by a fan/wind
+5.  Fluxes and flux densities
+    -   Heat, energy, Joules
+    -   Heat Flux, flow rate of energy, Power, W = J/s
+    -   Heat Flux Density, flow rate of energy per unit area, W/m2 = J/s/m2
+6.  Conservation of energy and mass
+    -   Neither mass/energy can be created or destroyed, energy is continually being converted from one form to another
+
+## Lecture 2 - Radiation Laws
+
+1.  Characteristics of radiation:
+    -   the emission of energy as electromagnetic waves or as moving particles
+    -   can travel in vacuum
+    -   travels in straight lines at up at c = 3\*10\^8 m/s (which takes 8min20s to travel from sun to the earth)
+    -   For the electromagnetic spectrum
+        -   Shortwave radiation: 0.15-0.3 um
+        -   Longwave radiation: 3-100 um
+    -   Electromagnetic waves or as moving particles
+        -   Wave-like: v = c (speed of light)/wavelength (m)
+        -   Particle-like (energy emitted in photons): energy of a photon, e = hv (h, planck's constant, h = 6.63\*10\^-34 Js)
+    -   This is matter because plants respond to the number of photons they absorb rather than simply to the total energy absorbed, which is important for photosynthesis
+        -   Plants can only use photons in visible range of spectrum, PAR (Photosynthetic active radiation)
+2.  Wien's displacement law
+    -   The wavelength of maximum emission (gamma_max) from an object is inversely proportional to the temperature (K) of its surface: gamma_max = b/T
+        -   b = 2898 umK
+3.  Stefan-Boltzmann law
+    -   The total energy emitted by a blackbody; Eb = 𝛔_b (5.67\*10^-8^ W/m2/K) \* T\^4
+    -   The total energy emitted by a greybody; Eb =𝜖 \* 𝛔_b (5.67\*10^-8^ W/m2/K) \* T\^4
+4.  Radiation Balance
+    -   absorption (a) + transmission (𝛕) + reflection (𝛼) = 1
+    -   Whatever isn't absorbed, must be either reflected or transmitted
