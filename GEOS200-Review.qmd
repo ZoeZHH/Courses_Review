@@ -20,7 +20,7 @@ editor: visual
 3.  Three states of water
     -   Ice, liquid and vapor
 
-        ![](images/Screen Shot 2023-11-29 at 3.42.35 PM-01.png){width="373"}
+        ![](images/Screen%20Shot%202023-11-29%20at%203.42.35%20PM-01.png){width="373"}
 
     -   Latent heat: the energy (kJ/kg) required for water to change states varies with temperature
 
@@ -67,3 +67,5 @@ editor: visual
 4.  Radiation Balance
     -   absorption (a) + transmission (𝛕) + reflection (𝛼) = 1
     -   Whatever isn't absorbed, must be either reflected or transmitted
+
+## Lecture 3 - Shortwave Radiation
