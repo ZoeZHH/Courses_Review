@@ -19,6 +19,11 @@ We take dataset gapminder for example, canada \<- gapminder \[241:252, \]. This 
 library (tidyverse)
 # load sample dataset - gapminder
 library (gapminder)
+# load sample dataset - flights
+library(nycflights13)
+```
+
+```{r}
 # Filter takes logical expressions and returns the rows which all are TRUE
 # Filter lifeExp < 29
 filter (gapminder, lifeExp < 29)
@@ -27,6 +32,8 @@ filter (gapminder, country == "Rwanda", year > 1979)
 # Filter both Rwanda and Afghanistan countries
 filter (gapminder, country %in% c("Rwanda", "Afghanistan"))
 ```
+
+### Row-wise
 
 **Using select to subset data row-wise:**
 
@@ -42,6 +49,24 @@ gapminder %>%
   filter(country == "Cambodia") %>%
   select(year, lifeExp)
 ```
+
+**Using arrange() to row-order data in a principled way:**
+
+```{r}
+# arrange() reorders the rows in a data frame.Imagine you wanted this data ordered by year then country, as opposed to by country then year.
+my_gap %>%
+  arrange(year, country)
+# Want just the data from 2007, sorted on life expectancy
+my_gap %>%
+  filter(year == 2007) %>%
+  arrange(lifeExp)
+# desc() for descending order
+my_gap %>%
+  filter(year == 2007) %>%
+  arrange(desc(lifeExp))
+```
+
+### Column-wise
 
 **Using mutate() to add new variables:**
 
@@ -62,23 +87,7 @@ summary(my_gap$gdpPercapRel)
 # Thus, I perceive Canada to be a “high GDP” country. 
 ```
 
-**Using arrange() to row-order data in a principled way:**
-
-```{r}
-# arrange() reorders the rows in a data frame.Imagine you wanted this data ordered by year then country, as opposed to by country then year.
-my_gap %>%
-  arrange(year, country)
-# Want just the data from 2007, sorted on life expectancy
-my_gap %>%
-  filter(year == 2007) %>%
-  arrange(lifeExp)
-# desc() for descending order
-my_gap %>%
-  filter(year == 2007) %>%
-  arrange(desc(lifeExp))
-```
-
-**Rename variables - rename() and select():**
+**Rename variables - rename():**
 
 ```{r}
 # rename (new name = old name)
@@ -86,6 +95,12 @@ my_gap %>%
   rename(life_exp = lifeExp,
          gdp_percap = gdpPercap,
          gdp_percap_rel = gdpPercapRel)
+
+```
+
+**Select certain columns - select():**
+
+```{r}
 # selcet (new name = old name)
 my_gap %>%
   filter(country == "Burrundi", year >1996) %>%
@@ -93,6 +108,18 @@ my_gap %>%
   select(yr=year, lifeExp, gdpPercap) %>%
   # this helps hoist a variable (gdpPercap) up to the front of the tibble.
   select(gdpPercap, everything())
+# starts_with("abc"): matches names that begin with “abc”.
+# ends_with("xyz"): matches names that end with “xyz”.
+# contains("ijk"): matches names that contain “ijk”.
+# num_range("x", 1:3): matches x1, x2 and x3.
+```
+
+**Move variables to the front - relocate():**
+
+```{r}
+# Use relocate() to move variables around. You might want to collect related variables together or move important variables to the front.
+flights %>%
+  relocate(time_hour, air_time)
 ```
 
 **group_by() & summarize():**
@@ -161,4 +188,14 @@ my_gap <- gapminder
 # rep(x, times) is a function used to repeat the elements of x, times number of times.
 my_gap <- my_gap %>%
   mutate(tmp=rep(ctib$gdpPercap, nlevels(country)))
+# & represents and, | represents or
+# na.rm = TRUE VS. na.rm = FALSE
+# na.rm = TRUE: tells the function to remove (or ignore) the NA values when performing calculations or operations.
+# na.rm = FALSE: this means that the function will not remove the NA values. In many cases, this will result in the function returning NA if there are any NA values in the data. 
+```
+
+## Graphing
+
+```{r}
+
 ```
