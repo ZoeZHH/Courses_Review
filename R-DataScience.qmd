@@ -4,7 +4,7 @@ format: html
 editor: visual
 ---
 
-## Manipulating Data with dplyr
+## Manipulating Data - dplyr
 
 **Background Information about dplyr:**
 
@@ -194,8 +194,128 @@ my_gap <- my_gap %>%
 # na.rm = FALSE: this means that the function will not remove the NA values. In many cases, this will result in the function returning NA if there are any NA values in the data. 
 ```
 
-## Graphing
+## Graphing - ggplot
+
+ggplot2 is one of the package of tidyverse.
 
 ```{r}
+print(mpg)
+```
 
+### Scatter-PLots
+
+```{r}
+# To plot mpg, run this code to put displ (car's engine size, in litres) on the x-axis and hwy (car's fuel efficiency on the highway) on the y-axis:
+# The graphing template for making graphs with ggplot2
+# ggplot(data=<DATA>) + 
+# <GEOM_FUNCTION> (mapping = aes(<MAPPINGS>))
+ggplot(data=mpg) + 
+  geom_point(mapping = aes(x=displ, y=hwy))
+# "hwy"和"displ"的值被取整，因此点会出现在网格上，许多点彼此重叠。这个问题被称为过度绘制（overplotting). You can avoid this gridding by setting the position adjustment to “jitter”. position = "jitter" adds a small amount of random noise to each point.
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy), position = "jitter")
+# Mapping the aesthetics in your plot to the variables in your dataset; in aes, map the colors of your points to the class variable to reveal the class of each car.
+ggplot(data=mpg) + 
+  geom_point(mapping = aes(x=displ, y=hwy, color=class))
+# Mapped class to the size aesthetic in the same way. 
+ggplot(data=mpg) + 
+  geom_point(mapping = aes(x=displ, y=hwy, size=class))
+# alpha= controls the transparency of the points
+ggplot(data=mpg) +
+  geom_point(mapping = aes(x=displ, y=hwy, alpha=class))
+# shape= controls the transparency of the points
+ggplot(data=mpg) +
+  geom_point(mapping=aes(x=displ, y=hwy, shape=class))
+```
+
+Set aesthetic properties of your geom manually, color = ? outside the aes()
+
+```{r}
+# set aesthetic properties of your geom manually
+ggplot(data=mpg) +
+  geom_point(mapping=aes(x=displ, y=hwy), color = "blue")
+
+```
+
+Facets, split your plot into **facets**
+
+```{r}
+# facet_wrap() to split plots
+ggplot(data=mpg) +
+  geom_point(mapping=aes(x=displ, y=hwy)) +
+  facet_wrap(~class, nrow=2)
+# facet_grid() to split the combination of two variables
+ggplot(data=mpg) +
+  geom_point(mapping=aes(x=displ, y=hwy)) +
+  facet_grid(drv~cyl)
+```
+
+### Line plots
+
+A **geom** is the geometrical object that a plot uses to represent data. People often describe plots by the type of geom that the plot uses.
+
+```{r}
+# Point
+ggplot(data=mpg) +
+  geom_point(mapping=aes(x=displ, y=hwy))
+# Smooth Lines
+ggplot(data=mpg) +
+  geom_smooth (mapping=aes(x=displ, y=hwy))
+# For lines, you could set the linetype of a line
+ggplot(data=mpg) +
+  geom_smooth (mapping=aes(x=displ, y=hwy, linetype=drv))
+# For lines, you could set group/color of a line
+ggplot(data=mpg) +
+  geom_smooth (mapping=aes(x=displ, y=hwy, group=drv))
+ggplot(data=mpg) +
+  geom_smooth (mapping=aes(x=displ, y=hwy, color=drv))
+```
+
+To display multiple geoms in the same plot, add multiple geom functions to [`ggplot()`](https://ggplot2.tidyverse.org/reference/ggplot.html):
+
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  geom_smooth(mapping = aes(x = displ, y = hwy))
+# To avoid repetition by passing a set of mappings to ggplot()
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point() +
+  geom_smooth()
+# One plot different
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point(mapping = aes(color = class)) + 
+  geom_smooth()
+# Filter out part of the data
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point(mapping = aes(color = class)) + 
+  geom_smooth(data = filter(mpg, class == "subcompact"), se = FALSE)
+```
+
+### Histograms
+
+```{r}
+head(diamonds)
+ggplot(data=diamonds) +
+  geom_bar(mapping=aes(x=cut))
+# You might want to override the default mapping from transformed variables to aesthetics. For example, you might want to display a bar chart of proportion, rather than count:
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, y = stat(prop), group = 1))
+# There’s one more piece of magic associated with bar charts. You can colour a bar chart using either the colour aesthetic, or, more usefully, fill:
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, colour = cut))
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = cut))
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = clarity))
+```
+
+### Boxplots
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = class, y = hwy)) + 
+  geom_boxplot()
+# coord_flip() switches the x and y axes.
+ggplot(data = mpg, mapping = aes(x = class, y = hwy)) + 
+  geom_boxplot() +
+  coord_flip()
 ```
