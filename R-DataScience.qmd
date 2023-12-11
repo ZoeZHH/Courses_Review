@@ -273,6 +273,10 @@ ggplot(data=mpg) +
 
 To display multiple geoms in the same plot, add multiple geom functions to [`ggplot()`](https://ggplot2.tidyverse.org/reference/ggplot.html):
 
+-   Aesthetics appearing in a `geom` layer apply only to that layer.
+
+-   If there are conflicting aesthetics in both the `ggplot()` function and the `geom` layer, the `geom` layer takes precedence.
+
 ```{r}
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy)) +
@@ -317,5 +321,6 @@ ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
 # coord_flip() switches the x and y axes.
 ggplot(data = mpg, mapping = aes(x = class, y = hwy)) + 
   geom_boxplot() +
+# handy way to flip the coordinates, instead of plotting the graph again.
   coord_flip()
 ```
