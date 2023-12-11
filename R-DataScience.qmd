@@ -324,3 +324,52 @@ ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
 # handy way to flip the coordinates, instead of plotting the graph again.
   coord_flip()
 ```
+
+## Tiday Data 
+
+(chrome-[extension://efaidnbmnnnibpcajpcglclefindmkaj/https://vita.had.co.nz/papers/tidy-data.pdf](extension://efaidnbmnnnibpcajpcglclefindmkaj/https://vita.had.co.nz/papers/tidy-data.pdf))
+
+### General Information
+
+A dataset is a collection of values, usually either numbers or strings. Values are organised into two ways:
+
+Every value belongs to a variable and an observation:
+
+-   A variable contains all values that measure the same underlying attribute across units
+
+-   An observation contains all values measured on the same units across attributes
+
+|              | treatmenta | treatmentb |
+|--------------|------------|------------|
+| John Smith   | \-         | 2          |
+| Jane Doe     | 16         | 11         |
+| Mary Johnson | 3          | 1          |
+
+Table 1. Imaginary experiment in a format seen in the wild
+
+| Name         | treatments | result |
+|--------------|------------|--------|
+| John Smith   | a          | \-     |
+| Jane Doe     | a          | 16     |
+| Mary Johnson | a          | 3      |
+| John Smith   | b          | 2      |
+| Jane Doe     | b          | 11     |
+| Mary Johnson | b          | 1      |
+
+Table 2. Reorganization of table 1 to make values, variables and observations more clear
+
+Table 2 is a tidy version of Table 1
+
+General Rule of Thumb: It's easier to describe functional relationships between variables (z is a linear combination of x and y, density is the ratio of weight to volume) than between rows.
+
+### Tidy Data
+
+1\) Requirements:
+
+-   Each variable forms a column
+
+-   Each observation forms a row
+
+-   Each type of observational unit forms a table
+
+-   
