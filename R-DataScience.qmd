@@ -325,7 +325,7 @@ ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
   coord_flip()
 ```
 
-## Tiday Data 
+## Tiday Data
 
 (chrome-[extension://efaidnbmnnnibpcajpcglclefindmkaj/https://vita.had.co.nz/papers/tidy-data.pdf](extension://efaidnbmnnnibpcajpcglclefindmkaj/https://vita.had.co.nz/papers/tidy-data.pdf))
 
@@ -372,4 +372,39 @@ General Rule of Thumb: It's easier to describe functional relationships between 
 
 -   Each type of observational unit forms a table
 
--   
+### Pivot_longer and Pivot_wider
+
+[`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html) and [`pivot_wider()`](https://tidyr.tidyverse.org/reference/pivot_wider.html) can take a data frame that specifies precisely how metadata stored in column names becomes data variables (and vice versa).
+
+[`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html) makes datasets **longer** by increasing the number of rows and decreasing the number of columns.
+
+```{r}
+# To begin with load the needed package
+library(tidyverse)
+# pivot_longer() Example 1: relig_income
+head(relig_income)
+relig_income %>%
+  pivot_longer(
+    cols = !religion, #cols describes which columns need to be reshaped. 
+    names_to = "income", #names_to gives the name of the variable that will be created from the data stored in the column names
+    values_to = "count" #gives the name of the variable that will be created from the data stored in the cell value
+  )
+# pivot_longer() Example 2: billboard
+head(billboard)
+billboard %>%
+  pivot_longer(
+    cols=starts_with("wk"),
+    names_to = "Week",
+    values_to = "rank",
+    values_drop_na = TRUE
+  )
+billboard %>% 
+  pivot_longer(
+    cols = starts_with("wk"), 
+    names_to = "week", 
+    names_prefix = "wk",
+    names_transform = as.integer,
+    values_to = "rank",
+    values_drop_na = TRUE,
+  )
+```
