@@ -8,7 +8,7 @@ editor: visual
 
 **The standard deviation (SD)** measures the amount of variability, or dispersion, from the individual data values to the mean; SD indicates how accurately the mean represents sample data.
 
--   ![](images/Screen Shot 2024-01-04 at 3.58.51 PM-03.png){width="227" height="44"}
+-   ![](images/Screen%20Shot%202024-01-04%20at%203.58.51%20PM-03.png){width="227" height="44"}
 
 ```{r}
 sd(x)
@@ -16,7 +16,7 @@ sd(x)
 
 **The standard error of the mean (SEM)** measures how far the sample mean (average) of the data is likely to be from the true population mean (uncertainty in means)
 
--   ![](images/Screen Shot 2024-01-04 at 4.00.30 PM.png){width="203"}
+-   ![](images/Screen%20Shot%202024-01-04%20at%204.00.30%20PM.png){width="203"}
 
 ```{r}
 # Method 1:
@@ -26,3 +26,29 @@ install.packages("plotrix")
 library("plotrix") 
 std.error(x)    
 ```
+
+The Central Limit Theorem (CLT) states that if you take sufficiently large random samples from a population (with replacement), regardless of the population's distribution, the distribution of the sample means will tend to follow a normal distribution as the sample size becomes larger.
+
+## Confidence Interval
+
+Builds on sample statistics. CI is the range in which a parameter (e.g. the mean value) lies with a certain probability.
+
+Assuming that this distribution is normally distributed, the confidence interval for the mean is given by:
+
+![](images/Screen Shot 2024-01-05 at 10.29.34 AM.png){width="323"}
+
+## Hypothesis Testing
+
+A hypothesis test is used whenever you want to test a [hypothesis](https://datatab.net/tutorial/hypothesis) about the population with the help of a sample.
+
+-   Briefly anticipating the p-value: if the p-value is less than 0.05, the null hypothesis is rejected; if the p-value is greater than 0.05, it is not rejected.
+
+-   **Type 1 error:** null hypothesis is true in population but we draw a sample that happens to be quite far away, so that we wrongly reject the null hypothesis
+
+-   **Type 2 error:** null hypothesis is false in population but we draw a sample that happens to be quite close, so that we wrongly not reject the null hypothesis
+
+## P-Value
+
+The p-value is used to either reject or retain (not reject) the null hypothesis in a hypothesis test. If the calculated p-value is smaller than the significance level, which in most cases is 5%, then the null hypothesis is rejected, otherwise it is retained.
+
+-   It tells us how likely it is to draw a sample that deviates from the population-null hypothesis (which often represents no effect or no difference) by an equal or greater amount than the observed values. When your p-value is less than 5%, it implies that the observed data are so unusual that they would occur less than 5% of the time under the null hypothesis. This is considered strong evidence against the null hypothesis, so it's often rejected in favor of the alternative hypothesis.
