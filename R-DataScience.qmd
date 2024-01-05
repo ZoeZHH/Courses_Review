@@ -327,6 +327,12 @@ ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
 
 ## Tiday Data
 
+```{r}
+library(tidyr)
+library(dplyr)
+library(readr)
+```
+
 (chrome-[extension://efaidnbmnnnibpcajpcglclefindmkaj/https://vita.had.co.nz/papers/tidy-data.pdf](extension://efaidnbmnnnibpcajpcglclefindmkaj/https://vita.had.co.nz/papers/tidy-data.pdf))
 
 ### General Information
@@ -407,4 +413,55 @@ billboard %>%
     values_to = "rank",
     values_drop_na = TRUE,
   )
+```
+
+**`names_to = c(".value", "event")`** The use of **`.value`** here tells **`pivot_longer`** that part of the original column names should be used as the names of new columns in the output. It's a way of saying, "These parts of the original column names actually represent separate variables and should become separate columns in the long format."
+
+```{r}
+head(household)
+household %>% 
+  pivot_longer(
+    cols = !family, 
+    names_to = c(".value", "child"), 
+    names_sep = "_", 
+    values_drop_na = TRUE
+  )
+```
+
+[`pivot_wider()`](https://tidyr.tidyverse.org/reference/pivot_wider.html) is the opposite of [`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html): it makes a dataset **wider** by increasing the number of columns and decreasing the number of rows. It\'s relatively rare to need [`pivot_wider()`](https://tidyr.tidyverse.org/reference/pivot_wider.html) to make tidy data, but it\'s often useful for creating summary tables for presentation, or data in a format needed by other tools.
+
+```{r}
+head(fish_encounters)
+fish_encounters %>%
+  pivot_wider(
+    names_from = station, #choose names that you want to switch to columns
+    values_from = seen, #choose correspond values
+    values_fill = 0 #fill these missing values in with zeros
+  )
+# id_cols = The id_cols parameter in the pivot_wider function can indeed be used to manage redundant columns in the process of reshaping data from long to wide format. 
+```
+
+### Others:
+
+tidyr::seperate( ) could split a column of name into first_name and last_name
+
+tidyr::unite( ) could re-unit first name and last name
+
+```{r}
+guest <- suppressMessages(read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/attend.csv"))
+head(guest)
+answer2.1 <- guest %>% 
+  pivot_longer(cols      = c(-party, -name), 
+               names_to  = c(".value", "event"),
+               names_sep = "_")
+answer2.2 <- answer2.1 %>% 
+  separate(name, 
+               into = c("first_name", "last_name"), 
+               sep=" ")
+head(answer2.2)
+answer2.3 <- answer2.2 %>%
+        unite(col = name, 
+                 c("first_name", "last_name"), 
+                 sep = " ")
+head(answer2.3)
 ```
