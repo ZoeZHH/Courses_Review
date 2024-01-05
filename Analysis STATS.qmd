@@ -1,0 +1,28 @@
+---
+title: "STATs"
+format: html
+editor: visual
+---
+
+## Standard Deviation and Standard Error
+
+**The standard deviation (SD)** measures the amount of variability, or dispersion, from the individual data values to the mean; SD indicates how accurately the mean represents sample data.
+
+-   ![](images/Screen Shot 2024-01-04 at 3.58.51 PM-03.png){width="227" height="44"}
+
+```{r}
+sd(x)
+```
+
+**The standard error of the mean (SEM)** measures how far the sample mean (average) of the data is likely to be from the true population mean (uncertainty in means)
+
+-   ![](images/Screen Shot 2024-01-04 at 4.00.30 PM.png){width="203"}
+
+```{r}
+# Method 1:
+standard_error <- sd(x) / sqrt(length(x))
+# Method 2:
+install.packages("plotrix")                           
+library("plotrix") 
+std.error(x)    
+```
