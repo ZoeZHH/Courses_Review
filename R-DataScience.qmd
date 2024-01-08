@@ -478,7 +478,7 @@ library(gapminder)
 
 The `broom` package has three crown functions that make it easy to extract each piece of information by converting your model into a tibble:
 
-1.  `tidy`: extract statistical summaries about each \"component\" of the model.
+1.  `tidy`: extract statistical summaries about each "component" of the model.
 
 2.  `augment`: add columns to the original data frame containing predictions.
 
@@ -524,4 +524,56 @@ glance(my_lm)
 
 # BIC: The Bayesian Information Criterion, similar to AIC but includes a penalty for the number of predictors. A lower BIC suggests a better model fit with a penalty for complexity.
 
+```
+
+If `broom::augment()` doesn\'t work, then the developer of the model almost surely made it so that the `predict()` function works (not part of the `broom` package). The `predict()` function typically takes the same format of the `augment()` function, but usually doesn\'t return a tibble.
+
+```{r}
+predict(my_lm) %>%
+  unname() %>%
+  head(5)
+# unname() is used here to remove the names from the vector of predicted values, likely for reasons of simplicity, ease of further use, consistency, or formatting.
+predict(my_lm, newdata = tibble(wt = 3:5)) %>% 
+  unname()
+
+# find the regression coefficients
+coef(my_lm)
+# Standard error of the residuals with sigma()
+sigma(my_lm)
+
+```
+
+If you can\'t extract model information from built-in functions like `coef()` or `sigma()`, you can manually dig in to the model object. In most cases, a model object is just a list in disguise! (Lists are discussed in STAT 545B). You can therefore extract information like you would with any other list.
+
+```{r}
+names(my_lm)
+my_lm$df.residual
+
+# More info might be stored in yet another list after applying the summary() function:
+summary(my_lm)
+```
+
+Plotting models with geom_smooth ()
+
+```{r}
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+    geom_point() +
+    geom_smooth(method = "lm") 
+
+# Let’s try fitting a linear model to this relationship
+gapminder_Zimbabwe <- gapminder %>% 
+  filter(country == "Zimbabwe")
+gapminder_Zimbabwe %>% 
+  ggplot(aes(year, lifeExp)) + 
+  geom_point()
+
+ggplot(gapminder_Zimbabwe, aes(year,lifeExp)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = F)
+# Found linear model may not be representative to the data, now we will try to fit a second degree polynomial and see what would that look like
+ggplot(gapminder_Zimbabwe, aes(year,lifeExp)) +
+  geom_point() +
+  geom_smooth(method = "lm",
+              formula = y ~ poly(x,2), 
+              se = F)
 ```
