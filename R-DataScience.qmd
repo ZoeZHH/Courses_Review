@@ -577,3 +577,5 @@ ggplot(gapminder_Zimbabwe, aes(year,lifeExp)) +
               formula = y ~ poly(x,2), 
               se = F)
 ```
+
+## Dates, Times and Factors
