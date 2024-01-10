@@ -526,7 +526,7 @@ glance(my_lm)
 
 ```
 
-If `broom::augment()` doesn\'t work, then the developer of the model almost surely made it so that the `predict()` function works (not part of the `broom` package). The `predict()` function typically takes the same format of the `augment()` function, but usually doesn\'t return a tibble.
+If `broom::augment()` doesn't work, then the developer of the model almost surely made it so that the `predict()` function works (not part of the `broom` package). The `predict()` function typically takes the same format of the `augment()` function, but usually doesn't return a tibble.
 
 ```{r}
 predict(my_lm) %>%
@@ -543,7 +543,7 @@ sigma(my_lm)
 
 ```
 
-If you can\'t extract model information from built-in functions like `coef()` or `sigma()`, you can manually dig in to the model object. In most cases, a model object is just a list in disguise! (Lists are discussed in STAT 545B). You can therefore extract information like you would with any other list.
+If you can't extract model information from built-in functions like `coef()` or `sigma()`, you can manually dig in to the model object. In most cases, a model object is just a list in disguise! (Lists are discussed in STAT 545B). You can therefore extract information like you would with any other list.
 
 ```{r}
 names(my_lm)
@@ -579,3 +579,120 @@ ggplot(gapminder_Zimbabwe, aes(year,lifeExp)) +
 ```
 
 ## Dates, Times and Factors
+
+### Factors
+
+Values a factor take are levels.
+
+**Forcats** package is to provide a suite of useful tools that solve common problems with factors. **Forcats** is a core package in the tidyverse. It is installed via `install.packages("tidyverse")`, and loaded with `library(tidyverse)`.
+
+```{r}
+library(tidyverse)
+library(gapminder)
+```
+
+**Factor Inspection**
+
+```{r}
+str(gapminder$continent)
+levels(gapminder$continent)
+nlevels(gapminder$continent)
+class(gapminder$continent)
+# To get a frequency table as a tibble, we can use dplyr::count() or forcats::fact_count()
+gapminder %>%
+  count(continent)
+fct_count(gapminder$continent)
+```
+
+**Dropping unused levels**
+
+```{r}
+nlevels(gapminder$country)
+h_countries <- c("Egypt", "Haiti", "Romania", "Thailand", "Venezuela")
+h_gap <- gapminder %>%
+  filter(country %in% h_countries)
+nlevels(h_gap$country)
+h_gap
+# Even though h_gap only has data for a handful of countries, we are still schlepping around all 142 levels from the original gapminder tibble. To get rid of it, we can use 1) base function droplevels() operates on all the factors in a df or the fct_drop () operates on a factor
+h_gap_dropped <- h_gap %>%
+  droplevels()
+nlevels(h_gap_dropped$country)
+# forcats::fct_drop
+h_gap_country %>%
+  fct_drop() %>%
+  levels()
+```
+
+**Change order of the levels**
+
+Reorder factor levels: often makes plots much better!
+
+The factor is the grouping variable and the default summarizing function is `median()` but you can specify something else.
+
+```{r}
+# Order by Frequency
+gapminder$continent %>%
+  fct_infreq() %>%
+  levels()
+# Order by Frequency backwards
+gapminder$continent %>%
+  fct_infreq() %>%
+  fct_rev() %>%
+  levels()
+# Order by another variable
+# Order countries by median life expectancy
+fct_reorder (gapminder$country, gapminder$lifeExp) %>%
+  levels() %>%
+  head()
+# Backwards
+fct_reorder (gapminder$country, gapminder$lifeExp, .desc=TRUE) %>%
+  levels() %>%
+  head()
+# Order according to minimum instead of median
+fct_reorder (gapminder$country, gapminder$lifeExp, min) %>%
+  levels() %>%
+  head()
+
+```
+
+Use `fct_reorder2()` when you have a line chart of a quantitative x against another quantitative y and your factor provides the color. This way the legend appears in some order as the data! Contrast the legend on the left with the one on the right.
+
+```{r}
+h_countries <- c("Egypt", "Haiti", "Romania", "Thailand", "Venezuela")
+h_gap <- gapminder %>%
+  filter(country %in% h_countries) %>% 
+  droplevels()
+ggplot(h_gap, aes(x = year, y = lifeExp, color = country)) +
+  geom_line()
+ggplot(h_gap, aes(x = year, y = lifeExp,
+                  color = fct_reorder2(country, year, lifeExp))) +
+  geom_line() +
+  labs(color = "country")
+```
+
+**Change order of certain levels**
+
+```{r}
+h_gap$country %>%
+  levels()
+h_gap$country %>%
+  fct_relevel("Romania", "Haiti") %>%
+  levels()
+```
+
+**Recode the levels**
+
+```{r}
+i_gap <- gapminder %>% 
+  filter(country %in% c("United States", "Sweden", "Australia")) %>% 
+  droplevels()
+i_gap$country %>% 
+  levels()
+i_gap$country %>%
+  fct_recode("USA" = "United States", "Oz" = "Australia") %>% 
+  levels()
+```
+
+fct_c( ) is used to combine levels from 2 different df
+
+### Dates and Times
