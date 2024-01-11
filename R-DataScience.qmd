@@ -696,3 +696,68 @@ i_gap$country %>%
 fct_c( ) is used to combine levels from 2 different df
 
 ### Dates and Times
+
+Focus on the **lubridate** package, which makes it easier to work with dates and times in R
+
+```{r}
+library(tidyverse)
+library(lubridate)
+library(nycflights13)
+```
+
+There're 3 types of date/time data that refer to an instant in time:
+
+A **date**: Tibbles print this as `<date>`.
+
+A **time** within a day: Tibbles print this as `<time>`.
+
+A **date-time** is a date plus a time: it uniquely identifies an instant in time (typically to the nearest second). Tibbles print this as `<dttm>`.
+
+(Always use the simplest possible data type that works for your needs. That means if you can use a date instead of a date-time, you should. Date-times are substantially more complicated because of the need to handle time zones, which we\'ll come back to at the end of the chapter.)
+
+**Basics about creating date-time:**
+
+```{r}
+# To get the current date or date-time you can use today() or now():
+today()
+now()
+# create a date/time from a string
+ymd("2017-01-31")
+# Also works for unquoted numbers
+ymd(20170131)
+mdy("January 31st, 2017")
+dmy("31-Jan-2017")
+# for date-time
+ymd_hms("2017-10-31 20:11:59")
+mdy_hm("01/31/2017 08:01")
+# can also force the creation of a date-time from a date by supplying a timezone
+ymd(20170131, tz = "UTC")
+```
+
+Instead of a single string, sometimes you\'ll have the individual components of the date-time spread across multiple columns. This is what we have in the flights data:
+
+```{r}
+head(flights)
+# make_date() for dates and make_datetime() for date-times
+flights %>%
+  select(year, month, day, hour, minute) %>%
+  mutate(departure = make_datetime(year, month, day, hour, minute))
+# The times are represented in a slightly odd format, so we use modulus arithmetic to pull out the hour and minute components.
+make_datetime_100 <- function (year, month, day, time) {
+  make_datetime(year, month, day, time %/% 100, time %% 100)
+} 
+flights_dt <- flights %>%
+  filter(!is.na(dep_time), !is.na(arr_time)) %>%
+  mutate(
+  dep_time = make_datetime_100(year, month, day, dep_time),
+  arr_time = make_datetime_100(year, month, day, arr_time),
+  sched_dep_time = make_datetime_100(year, month, day, sched_dep_time),
+  sched_arr_time = make_datetime_100(year, month, day, sched_arr_time)
+  ) %>%
+  select(origin, dest, ends_with("delay"), ends_with("time"))
+flights_dt
+```
+
+## Operators
+
+%/% is division, %% is remainder of the division

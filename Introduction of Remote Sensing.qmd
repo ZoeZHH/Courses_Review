@@ -1,0 +1,73 @@
+---
+title: "Introduction of Remote Sensing"
+format: html
+editor: visual
+---
+
+# **Ariel Photographs**
+
+Remote sensing data came from **platforms** that carrying **sensors**
+
+-   Early platforms used for aerial photos include balloons and kites, even pigeons
+
+**Aerial Photographs:**
+
+-   (After the WWI, planes and pilots and cameras spread, widespread use in soil surveys ... Today, aerial photography mainly used for historical coverage and with different **spatial resolution**)
+
+-   Aerial photos can take in vertical (creating maps) or oblique (more use in natural purposes (disasters...))
+
+## **Scales of aerial photos**
+
+### **Large-scale VS. small scale**
+
+When we talk about a "larger scale" in aerial photography, it means that the images show a smaller area of the earth's surface but with more detail.
+
+**Larger Scale**: A large-scale aerial photograph covers a smaller area on the ground but shows that area in greater detail. For instance, a 1:1,000 scale photo (where 1 unit on the photo equals 1,000 units on the ground) is considered a large scale;
+
+**Smaller Scale**: Conversely, a small-scale aerial photograph covers a larger area on the ground but with less detail. A 1:100,000 scale photo, for example, would show a much larger area with less detail per unit of area on the photo.
+
+### **Scale of aerial photos**
+
+1\) Scale = map distance : actual distance
+
+2\) Scale = camera focal length : flying height above terrain (scale decreases as flying higher)
+
+## Distortion of airphotos
+
+#### Types of distortion:
+
+-   Relief Displacement : Location of tall objects displaced from their true location
+
+    -   Amount and direction of displacements depends on object's location in a photo
+
+-   Terrain Variability: scale of map differs across elevations.
+
+    -   Flying over a complex terrain, the scale could be different (higher terrain should correspond with flying higher)
+
+-   Camera tilt distortion: airplanes fly imperfectly and camera tilt makes views slightly oblique, causing distortion
+
+#### Orthophotos
+
+\- Air photo that has been geometrically corrected to a constant scale
+
+\- remove distortion due to uneven terrain, camera tilt
+
+\- objects appear in their true locations
+
+## Air Photo Interpretation
+
+#### **Photogrammetry** - Info about 3D features
+
+science and technology of obtaining spatial measurements from photographs (determining object heights)
+
+-   Stereoscopic version: our brain uses the differences in what each eye sees to reconstruct 3D space
+
+    -   Overlap between stereo pairs of air photos allow us to vision in 3D
+
+    -   Sophisticated software now making measurements on stereo pairs.
+
+#### **Air photo interpretation**
+
+Identification of objects to generate maps and reports of observations, use characteristics of images: **shape, size, pattern (planted area/natural), tone, texture (tells us structure, the composition of area), shadows, site, association**.
+
+Challenges: 1) Overhead, unfamiliar perspective; 2) Unfamiliar and variable scales and resolutions; 3) Use of wavelengths outside the visible spectrum
