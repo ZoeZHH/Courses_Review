@@ -71,3 +71,141 @@ science and technology of obtaining spatial measurements from photographs (deter
 Identification of objects to generate maps and reports of observations, use characteristics of images: **shape, size, pattern (planted area/natural), tone, texture (tells us structure, the composition of area), shadows, site, association**.
 
 Challenges: 1) Overhead, unfamiliar perspective; 2) Unfamiliar and variable scales and resolutions; 3) Use of wavelengths outside the visible spectrum
+
+# **Electromagnetic Radiation**
+
+False Color Composites (假彩色合成) : Infrared as red (vegetation reflects IR radiation, water absorbs it)
+
+Remote sensing process: sunlight -\> surface -\> remote sensing
+
+**Overall**
+
+Travel in vacuum of space in speed of light
+
+Higher energy, shorter wavelengths higher frequency
+
+Visible spectrum range: 400-700 nm (0.4-0.7 µm)
+
+## Particle Theory
+
+Particle Theory: describes EM radiation as particles (quanta/photons) with energy
+
+C = v \* 𝞴( C=speed of light, v=frequency, 𝞴=wavelength)
+
+Q = hv (Q-Energy of Quantum in J; h-Planck's constant, 6.24\*10-34 J/s; v=frequency)
+
+Takeaway Point: Energy decreases with wavelength (shorter wavelength, higher frequency, higher energy)
+
+## Wavelengths and Remote Sensors:
+
+Longer wavelengths are harder to detect -\> 1) sensor needs to be more sensitive or 2) 'source' area need to become larger
+
+## EM radiation and Temperature:
+
+Stefan-Boltzmann law: describes amount of radiation emit by bodies, M=𝞂 $T^4$
+
+Peak wavelength of a blackbody decreases with T according to Wien's displacement law, $\gamma_m = A/T$
+
+$\gamma_m$ is wavelength od maximum radiance
+
+## Interactions of EM with atmosphere:
+
+EM interactions with the atmosphere differ across particle size and abundance
+
+Two situations happened:
+
+1\) **Scattering:** unpredictable diffusion of radiation by particles in the atmosphere.
+
+-   Three types depends on wavelengths and particle size
+
+    -   Rayleigh Scattering (particles \<\< wavelength), CO2, O2, N2, inversely proportional to $\gamma^4$, longer wavelength, smaller scattering
+
+        -   Sunsets is red because light scattering is more complete
+
+    -   Mie Scattering (particle size \~ wavelength), dust, pollen, smoke, water vapor; affects longer wavelengths than Rayleigh scattering, tends to scatter in the forward direction
+
+    -   Non-selective scatter (particle size \> wavelength), water droplets, scatter wavelengths equally thus causing a white appearance, this is why clouds is white
+
+2\) **Absorption:** only some radiation reaches the earth's surface
+
+# Reflectance
+
+Energy at the earth's surface: E~I~= E~R~ + E~A~ + E~T,~ proportions are wavelengths dependent
+
+**Satellites typically measure E~R~ in Wm-2**
+
+E~R~ depends on 1) amount of incident radiation and 2) properties of the surface
+
+Spectral reflectance = E~R~ / E~I~ (expressed in %)
+
+Sensors typically measure the total radiance in a given range of wavelengths (not a continuous)
+
+## Specular Reflection VS. Diffuse Reflection:
+
+Specular Reflection: angle of reflection = angle of incidence; Mirror-like reflections
+
+Diffuse Reflection: reflect uniformly in all directions
+
+What influences diffuse vs. specular reflection?
+
+1\) Roughness of a surface
+
+**Types of geometric effects:**
+
+1\) Differential shading, camera with shade part of the tree is different than the part of tree covered by light
+
+2\) Differential scattering,
+
+3\) Specular reflection, no identities will be told.
+
+**How do we understand, model, correct the geometric effects?**
+
+Bidirectional reflectance distribution function (BRDF): mathematical function that predicts, for a given project, what reflectance will be at any viewing angle and sun elevation angle
+
+path radiance: radiance that have been scattered
+
+## **Named Spectral Regions:**
+
+Gamma and X-rays: almost fully blocked by atmosphere, not using in remote sensing
+
+UV wavelengths: mostly blocked by earth's atmosphere (ozone), some applications for mapping oil spills
+
+Visible wavelengths: atmospheric window allow most visible light through; panchromatic imagery, measures reflectance in all visible wavelengths
+
+Infrared-Near infrared (0.7-1.4um): many applications in RS, vegetation monitoring and delineating water bodies
+
+Infrared-Short-wave infrared (SWIR, 1.4-3um): soil moisture, vegetation water content, geology
+
+Infrared-Far-infrared (3-1000 um): emitted by warm objects, used to measure earth surface temperatures, detect fires
+
+Microwave (0.1-3 cm): wavelengths used in RADAR
+
+# Digital Imagery
+
+Optical remote sensing products come in the form of a digital image
+
+## Structural of Digital Imagery
+
+A digital image is a raster, i.e. a 2D array of digital numbers (DNs), DNs correspond to the EM energy measured in each pixel
+
+Panchromatic band: 1) blue, green, red （yellow is green and red), we had three cones in our eyes, correspond each band
+
+## Spectral band
+
+2024/01/30
+
+Warm-up questions: What are spatial and temporal resolution? Name one factor (characteristics of a satellite or sensor) that you think influences spatial and/or temporal resolution.
+
+Spatial Resolution: How many pixels an area; tells you the details of a picture; the distance the satellite take a photo from
+
+Temporal Resolution: the frequency the sensor takes the photo; storage & frequency take the photo
+
+Digital Imagery: raster stack of spectral band images
+
+What determines image resolution?
+
+Altitude: how far from earth
+
+Inclination: degrees deviates refer to equatorial , 0 degree the same as equatorial, 90 degree vertically refer to earth
+
+Eccentricity: e=0, circle; to ellipse

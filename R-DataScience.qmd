@@ -632,12 +632,12 @@ The factor is the grouping variable and the default summarizing function is `med
 ```{r}
 # Order by Frequency
 gapminder$continent %>%
-  fct_infreq() %>%
+  fct_infreq() %>% #the levels of the factor will be ordered from the most frequent level to the least frequent
   levels()
 # Order by Frequency backwards
 gapminder$continent %>%
   fct_infreq() %>%
-  fct_rev() %>%
+  fct_rev() %>% # This function reverses the order of the levels of a factor.
   levels()
 # Order by another variable
 # Order countries by median life expectancy
@@ -713,7 +713,7 @@ A **time** within a day: Tibbles print this as `<time>`.
 
 A **date-time** is a date plus a time: it uniquely identifies an instant in time (typically to the nearest second). Tibbles print this as `<dttm>`.
 
-(Always use the simplest possible data type that works for your needs. That means if you can use a date instead of a date-time, you should. Date-times are substantially more complicated because of the need to handle time zones, which we\'ll come back to at the end of the chapter.)
+(Always use the simplest possible data type that works for your needs. That means if you can use a date instead of a date-time, you should. Date-times are substantially more complicated because of the need to handle time zones, which we'll come back to at the end of the chapter.)
 
 **Basics about creating date-time:**
 
@@ -734,7 +734,7 @@ mdy_hm("01/31/2017 08:01")
 ymd(20170131, tz = "UTC")
 ```
 
-Instead of a single string, sometimes you\'ll have the individual components of the date-time spread across multiple columns. This is what we have in the flights data:
+Instead of a single string, sometimes you'll have the individual components of the date-time spread across multiple columns. This is what we have in the flights data:
 
 ```{r}
 head(flights)
